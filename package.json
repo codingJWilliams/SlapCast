@@ -1,0 +1,23 @@
+{
+  "name": "slapcast",
+  "version": "1.0.0",
+  "description": "An app that allows you to control multiple multimedia displays",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codingJWilliams/SlapCast.git"
+  },
+  "keywords": [
+    "cast",
+    "display"
+  ],
+  "author": "Jay Williams",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codingJWilliams/SlapCast/issues"
+  },
+  "homepage": "https://github.com/codingJWilliams/SlapCast#readme"
+}
