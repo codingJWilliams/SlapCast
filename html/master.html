@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-dark bg-dark justify-content-between flex-nowrap flex-row">
+      <div class="container">
+        <a class="navbar-brand float-left" href="#">
+          <img src="logo.png" width="45" height="35" class="d-inline-block align-top" alt="">
+          SnapCast Master
+        </a>
+        <ul class="navbar-nav mr-auto" style="display: inline;">
+        </ul>
+        <span class="navbar-text" style="padding-bottom: 10px; padding-right: 20px">
+          Public key: {{ publicpin }}
+        </span>
+        <span class="navbar-text" style="padding-bottom: 10px;">
+          Created by <a style="color: white" href="https://github.com/codingJWilliams">Jay Williams</a>
+        </span>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <br>
+      <br>
+      <br>
+      <div class="row" id="main_screen">
+        <div class="col-sm-6">
+          <div class="card text-white bg-info">
+            <div class="card-body">
+              <h4 class="card-title">
+                Cues
+              </h4>
+              <p class="card-text">
+                First choose a cue type, then configure and push it to your displays.
+              </p>
+            </div>
+            <ul class="list-group list-group-flush bg-info">
+              <li class="list-group-item bg-info">
+                Text
+                <button class="btn btn-dark float-right" onclick="cue('text')">
+                  Use this type
+                </button>
+              </li>
+              <li class="list-group-item bg-info">
+                Image
+                <button class="btn btn-dark float-right" onclick="cue('image')">
+                  Use this type
+                </button>
+              </li>
+              <li class="list-group-item bg-info">
+                Youtube video
+                <button class="btn btn-dark float-right" onclick="cue('yt')">
+                  Use this type
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card text-white bg-dark">
+            <div class="card-body">
+              <h4 class="card-title">
+                Currently Displaying
+              </h4>
+              <p class="card-text">
+              </p>
+            </div>
+            <table class="table text-white bg-dark">
+              <tr class="bg-success">
+                <td>
+                  Global
+                </td>
+                <td>
+                  Text: <br>Welcome to North Birmingham Academy. For security please call <strong>12345</strong>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Reception
+                </td>
+                <td>
+                  Text: <br>Please check in at desk <strong>A</strong> with Miss Barker. You will need photo ID
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Classrooms
+                </td>
+                <td>
+                  Clock:<br>Counting down until 3:00PM<br>Message: Time until home time :-)
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="cue_text" style="display: none">
+        <div class="col-sm-8">
+          <div class="card text-white bg-dark">
+            <div class="card-body">
+              <h4 class="card-title">
+                Text to display
+              </h4>
+              <textarea name="content" cols=30></textarea>
+            </div>
+          </div>
+          <br>
+          <div class="card text-white bg-success">
+            <div class="card-body">
+              <h4 class="card-title">
+                Formatting
+              </h4>
+              <p class="card-text">
+                You can use markdown to format messages.<br>
+                Basic Markdown:<br>
+                <kbd>__text__</kbd> -> <strong> text </strong><br>
+                <kbd> *text* </kbd> -> <em> text </em><br>
+                <kbd> `monospace`</kbd> -> <kbd> monospace </kbd>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="card text-white bg-warning">
+            <div class="card-body">
+              <h4 class="card-title">
+                Push
+              </h4>
+              <p class="card-text">
+                Continue to push screen?
+              </p>
+              <button class="btn btn-danger">
+                Continue
+              </button>
+              <button class="btn btn-dark">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script>
+    function cue(type) {
+      if (type === "text") {
+        $("#main_screen").fadeOut(function () {
+          $("#cue_text").fadeIn()
+        })
+      }
+    }
+    </script>
+  </body>
+</html>
