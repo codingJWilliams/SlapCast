@@ -4,7 +4,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <style>
+    .table-borderless td, .table-borderless th { border: 0 !important; }
+    </style>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css" crossorigin="anonymous">
   </head>
@@ -13,7 +15,7 @@
       <div class="container">
         <a class="navbar-brand float-left" href="#">
           <img src="logo.png" width="45" height="35" class="d-inline-block align-top" alt="">
-          SnapCast Master
+          SnapCast <font class="text-primary">Master</font>
         </a>
         <ul class="navbar-nav mr-auto" style="display: inline;">
         </ul>
@@ -21,7 +23,7 @@
           Public key: {{ publicpin }}
         </span>
         <span class="navbar-text" style="padding-bottom: 10px;">
-          Created by <a style="color: white" href="https://github.com/codingJWilliams">Jay Williams</a>
+          Created by <a class="text-primary" href="https://github.com/codingJWilliams">Jay Williams</a>
         </span>
       </div>
     </nav>
@@ -31,7 +33,7 @@
       <br>
       <div class="row" id="main_screen">
         <div class="col-sm-6">
-          <div class="card text-white bg-info">
+          <div class="card text-white bg-dark">
             <div class="card-body">
               <h4 class="card-title">
                 Cues
@@ -40,27 +42,28 @@
                 First choose a cue type, then configure and push it to your displays.
               </p>
             </div>
-            <ul class="list-group list-group-flush bg-info">
-              <li class="list-group-item bg-info">
+            <ul class="list-group list-group-flush bg-dark">
+              <li class="list-group-item bg-dark">
                 Text
-                <button class="btn btn-dark float-right" onclick="cue('text')">
+                <button class="btn btn-outline-primary float-right" onclick="cue('text')">
                   Use this type
                 </button>
               </li>
-              <li class="list-group-item bg-info">
+              <li class="list-group-item bg-dark">
                 Image
-                <button class="btn btn-dark float-right" onclick="cue('image')">
+                <button class="btn btn-outline-primary float-right" onclick="cue('image')">
                   Use this type
                 </button>
               </li>
-              <li class="list-group-item bg-info">
+              <li class="list-group-item bg-dark">
                 Youtube video
-                <button class="btn btn-primary float-right" onclick="cue('yt')">
+                <button class="btn btn-outline-primary float-right" onclick="cue('yt')">
                   Use this type
                 </button>
               </li>
             </ul>
           </div>
+          <br>
         </div>
         <div class="col-sm-6">
           <div class="card text-white bg-dark">
@@ -71,13 +74,16 @@
               <p class="card-text">
               </p>
             </div>
-            <table class="table text-white bg-dark">
-              <tr class="bg-success">
+            <table class="table table-borderless bg-dark">
+              <tr class="text-primary">
                 <td>
                   Global
                 </td>
                 <td>
-                  Text: <br>Welcome to North Birmingham Academy. For security please call <strong>12345</strong>
+                  Text
+                </td>
+                <td>
+                  Welcome to North Birmingham Academy. For security please call <strong>12345</strong>
                 </td>
               </tr>
               <tr>
@@ -85,7 +91,10 @@
                   Reception
                 </td>
                 <td>
-                  Text: <br>Please check in at desk <strong>A</strong> with Miss Barker. You will need photo ID
+                  Text
+                </td>
+                <td>
+                  Please check in at desk <strong>A</strong> with Miss Barker. You will need photo ID
                 </td>
               </tr>
               <tr>
@@ -93,7 +102,10 @@
                   Classrooms
                 </td>
                 <td>
-                  Clock:<br>Counting down until 3:00PM<br>Message: Time until home time :-)
+                  Clock
+                </td>
+                <td>
+                  Counting down until 3:00PM<br>Message: Time until home time :-)
                 </td>
               </tr>
             </table>
@@ -107,11 +119,27 @@
               <h4 class="card-title">
                 Text to display
               </h4>
-              <textarea name="content" cols=30></textarea>
+              <p class="card-text">
+                Markdown is supported </p>
+              <textarea id="text_cue_text" class="form-control bg-transparent text-primary" style="font-size: 40px" name="content" cols=30 rows=5></textarea>
             </div>
           </div>
           <br>
-          <div class="card text-white bg-success">
+          <div class="card text-white bg-dark">
+            <div class="card-body">
+              <h4 class="card-title">
+                Options
+              </h4>
+              <!--p class="card-text">
+                Markdown is supported
+              </p-->
+              <input id="text_cue_foreground" type="text" class="form-control bg-transparent text-primary" style="font-size: 40px" name="content" size=30 placeholder="Text Color - #000000">
+              <input id="text_cue_background" type="text" class="form-control bg-transparent text-primary" style="font-size: 40px; margin-top: 10px" name="content" size=30 placeholder="Background Color - #000000">
+              <input id="text_cue_family"     type="text" class="form-control bg-transparent text-primary" style="font-size: 40px; margin-top: 10px" name="content" size=30 placeholder="Font Family - consolas">
+            </div>
+          </div>
+          <br>
+          <!--div class="card text-white bg-success">
             <div class="card-body">
               <h4 class="card-title">
                 Formatting
@@ -124,10 +152,10 @@
                 <kbd> `monospace`</kbd> -> <kbd> monospace </kbd>
               </p>
             </div>
-          </div>
+          </div-->
         </div>
         <div class="col-sm-4">
-          <div class="card text-white bg-warning">
+          <div class="card text-white bg-dark">
             <div class="card-body">
               <h4 class="card-title">
                 Push
@@ -135,22 +163,35 @@
               <p class="card-text">
                 Continue to push screen?
               </p>
-              <button class="btn btn-danger">
+              <button class="btn btn-primary" onclick="cueTextContinue()">
                 Continue
               </button>
-              <button class="btn btn-dark">
+              <button class="btn btn-dark" onclick="$('#cue_text').fadeOut(function () { $('#main_screen').fadeIn() })">
                 Cancel
               </button>
             </div>
           </div>
         </div>
       </div>
+      <div class="row" id="push" style="display: none">
+        <div class="col-sm-12">
+          <div class="card text-white bg-dark">
+            <h4 class="card-title">
+              Push saved object?
+            </h4>
+            <button class="btn btn-outline-danger" onclick="pushSaved()"> Push </button>
+        </div>
+      </div>
       <br>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
+    const socket = io();
+    socket.emit("connect-as-master", {key: "9073285"})
+    var key = "9073285"
     function cue(type) {
       if (type === "text") {
         $("#main_screen").fadeOut(function () {
@@ -158,6 +199,25 @@
         })
       }
     }
+    var savedObj = {}
+    function cueTextContinue() {
+      var params = {};
+      params.cue = "text"
+      params.key = "9073285";
+      params.text = $("#text_cue_text").val();
+      params.font_family = $("#text_cue_family").val() == undefined ? "Segoe UI" : $("#text_cue_family").val();
+      params.foreground = $("#text_cue_foreground").val() == undefined ? "#000000" : $("#text_cue_foreground").val();
+      params.background = $("#text_cue_background").val() == undefined ? "transparent" : $("#text_cue_background").val();
+      $("#cue_text").fadeOut(function () {
+        $("#push").fadeIn(function () {
+          savedObj = params
+        })
+      })
+    }
+    function pushSaved() {
+      socket.emit("cue", savedObj)
+    }
+
     </script>
   </body>
 </html>

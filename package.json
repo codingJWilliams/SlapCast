@@ -23,6 +23,7 @@
   "dependencies": {
     "express": "^4.15.4",
     "express-nunjucks": "^2.2.3",
+    "lowdb": "^0.17.1",
     "nodemon": "^1.11.0",
     "nunjucks": "^3.0.1",
     "socket.io": "^2.0.3"
