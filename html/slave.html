@@ -37,6 +37,7 @@
     <script src="https://cdn.rawgit.com/davatron5000/FitText.js/master/jquery.fittext.js"></script>
     <script src="https://cdn.rawgit.com/simplefocus/FlowType.JS/master/flowtype.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.rawgit.com/js-cookie/js-cookie/master/src/js.cookie.js"></script>
     <script>
     const socket = io();
     var onevent = socket.onevent;
@@ -46,7 +47,7 @@
       packet.data = ["*"].concat(args);
       onevent.call(this, packet);      // additional call to catch-all
     };
-    socket.emit("connect-as-slave", {key: "511652"})
+    socket.emit("connect-as-slave", {key: Cookies.get("pin")})
     socket.on("display-text", function (data) {
       displayText(data)
     })
@@ -88,7 +89,7 @@
         $("#bigtext").css({
           "color": params.foreground,
           "background-color": params.background,
-          "font-family": params.font_family
+          "font-family": params.font_family,
         })
         var obj = $("#bigtext")
         obj.html(obj.html().replace(/\n/g,'<br/>'));
