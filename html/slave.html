@@ -19,60 +19,79 @@
 
     </style>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
 
   <div id="container">
-  <div id="bigtext">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis lorem nec malesuada interdum. Sed nec mollis nisl, dapibus scelerisque mauris. Curabitur non rhoncus diam. Mauris vehicula, urna ac lobortis viverra, nisl urna condimentum eros, id interdum purus diam et quam. Fusce lacus erat, mollis non sodales eget, pellentesque et sem. Nulla pharetra eros a sem suscipit dapibus. In euismod commodo ante, sed mattis est placerat sit amet. Nullam fringilla turpis eu enim luctus aliquam a sed massa. Nam vel eleifend ex. Phasellus tincidunt nunc eget urna mollis, sed rutrum sapien hendrerit. Nunc congue sollicitudin orci, et mollis turpis interdum ut. Cras elementum eleifend aliquam. Maecenas dignissim convallis quam, eu tempus lectus vulputate in. Duis sit amet aliquet nisl. Morbi posuere, ex quis auctor porta, risus nisi egestas purus, a imperdiet massa ipsum a arcu.</div>
+    <div id="content">
+
+    </div>
+  <div id="bigtext"></div>
   </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script src="https://cdn.rawgit.com/davatron5000/FitText.js/master/jquery.fittext.js"></script>
     <script src="https://cdn.rawgit.com/simplefocus/FlowType.JS/master/flowtype.js"></script>
 
     <script>
-    /*function displayElement(el){
-      $("#parent").html("")
-      $("#parent").append(el)
-      var $el = $("#parent").children()[0]
-      var elwidth = $el.clientWidth;
-      var elheight = $el.clientHeight;
-      var winwidth = $(window).width();
-      var winheight = $(window).height();
-      console.log(winwidth, elwidth)
-      console.log((winwidth / 2) - (elwidth / 2))
-      $el.style.position = "absolute";
-      $el.style.top = (winheight / 2) - (elheight / 2);
-      $el.style.left = "calc(50% - "+elwidth+"px)";
-
-      $("#parent").css({
-        position: "absolute",
-        top: (winheight / 2) - (elheight / 2),
+    function clear(cb) {
+      $("#container").fadeOut(function () {
+        $("#bigtext").text("")
+        $("html").html("")
+        cb()
       })
     }
-    */
-    // function displayElement(el) {
-    //   console
-    //   $("body")[0].prepend($(el))
+    function displayImage(src) {
+      var source = src;
+      clear(function () {
+        $("#content").append("<img src='"+source+"' style='display: none'>");
+        //console.error($("#container").children()[0])
 
-    //   $("body").children()[0].fitText()
-    // }
-    // $('#bigtext').fitText(2, { minFontSize: '20px', maxFontSize: '400px' });
-    // $('body').flowtype({
-    //   minFont : 12,
-    //   maxFont : 20
-    // });
+        $("#content").children()[0].onload = function () {
+          var el = $("#content").children()[0]
+
+          el.width = $(window).width() - 50;
+          el.style.display = "inline"
+          $("#container").fadeIn()
+        }
+      })
+
+    }
     function displayText(t) {
-      var width = screen.width;
-      var height = screen.height;
+      clear(function () {
+        var width = screen.width;
+        var height = screen.height;
+        $("#bigtext").text(t)
+        var obj = $("#bigtext")
+        obj.html(obj.html().replace(/\n/g,'<br/>'));
+        console.log(t.split("").length)
+        if (t.split("").length < 50) {
+          $('body').flowtype({
+            fontRatio : 10,
+            maxFont: 4000
+          });
+        } else if (t.split("").length > 50 && t.split("").length <= 100) {
+          $('body').flowtype({
+            fontRatio : 15,
+            maxFont: 4000
+          });
+        } else if (t.split("").length > 100 && t.split("").length <= 200) {
+          $('body').flowtype({
+            fontRatio : 17,
+            maxFont: 4000
+          });
+        } else if (t.split("").length > 200) {
+          $('body').flowtype({
+            fontRatio : 30,
+            maxFont: 4000
+          });
+        }
+        $("#container").fadeIn()
+      })
 
-
-      $('body').flowtype({
-        fontRatio : 17
-      });
     }
 
     </script>

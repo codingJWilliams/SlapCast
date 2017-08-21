@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" crossorigin="anonymous">
   </head>
   <body>
     <nav class="navbar fixed-top navbar-dark bg-dark justify-content-between flex-nowrap flex-row">
@@ -17,7 +17,7 @@
         </a>
         <ul class="navbar-nav mr-auto" style="display: inline;">
           <li class="nav-item active" style="padding-bottom: 3px; padding-right: 3px; display: inline-block;">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link text-primary" href="#">Home</a>
           </li>
           <li class="nav-item" style="padding-bottom: 3px; padding-right: 3px; display: inline-block;">
             <a class="nav-link" href="#">How it works</a>
@@ -43,7 +43,7 @@
             </div>
             <div class="card-body">
               <p class="card-text">
-                SnapCast is a hosted service to simplify the deployment of TV alerting systems. Using your private code you can instantly update all of the connected slaves with any number of <mark>cues</mark>
+                SnapCast is a hosted service to simplify the deployment of TV alerting systems. Using your private code you can instantly update all of the connected slaves with any number of <font class="text-primary">cues</font>
               </p>
             </div>
           </div>
@@ -54,7 +54,7 @@
             <div class="card-body">
               <p class="card-text">
                 That's the best part.<br>
-                <em>It's absolutely free.</em> SnapCast was written in Node.JS by <a style="color: white" href="https://github.com/codingJWilliams">Jay Williams</a> to get experience with writing professional grade solutions.
+                <font class="text-primary">It's absolutely free.</font> SnapCast was written in Node.JS by <a class="text-primary" href="https://github.com/codingJWilliams">Jay Williams</a> to get experience with writing professional grade solutions.
               </p>
             </div>
           </div>
@@ -70,9 +70,9 @@
               </p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item bg-dark">Plain text</li>
-              <li class="list-group-item bg-dark">Images</li>
-              <li class="list-group-item bg-dark">Videos</li>
+              <li class="list-group-item bg-dark text-primary">Plain text</li>
+              <li class="list-group-item bg-dark text-primary">Images</li>
+              <li class="list-group-item bg-dark text-primary">Videos</li>
             </ul>
           </div>
         </div>
@@ -80,14 +80,14 @@
       <div class="row options-thing">
         <div class="col-sm-2" id="padding-1"> </div>
         <div class="col-sm-4 master-mode">
-          <div class="card text-white" style="background-color: #f66a6a">
+          <div class="card text-white bg-primary">
             <img class="card-img-top" src="upload.png" alt="">
             <div class="card-body">
               <h4 class="card-title">Master Mode</h4>
               <p class="card-text">
                 You will recieve a secret code and a public code. The secret code will allow you to control slaves connected via the public code.
               </p>
-              <a href="javascript:master()" class="btn btn-dark">Begin a session</a>
+              <a href="javascript:master()" class="btn btn-outline-dark">Begin a session</a>
             </div>
           </div>
         </div>
@@ -99,8 +99,7 @@
               <p class="card-text">
                 Use a public code to slave a display to a specific master. This display will then take cues from the master.
               </p>
-              <br>
-              <a href="javascript:slave()" class="btn btn-dark">Slave this display</a>
+              <a href="javascript:slave()" class="btn btn-outline-dark">Slave this display</a>
             </div>
           </div>
         </div>
@@ -125,7 +124,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script>
     function slave() {
       $(".un-neccessary").fadeOut()
