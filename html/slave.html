@@ -18,6 +18,9 @@
     }
 
     </style>
+    <title>
+      SnapCast Slave
+    </title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
@@ -48,8 +51,16 @@
       onevent.call(this, packet);      // additional call to catch-all
     };
     socket.emit("connect-as-slave", {key: Cookies.get("pin")})
+    socket.on("invalid-public-key", function (data) {
+      displayText({text: "Invalid Public Key", foreground: "red"})
+    })
     socket.on("display-text", function (data) {
       displayText(data)
+    })
+    socket.on("clear-screen", function () {
+      clear(function () {
+
+      })
     })
     socket.on("*", function (e, d) {
       console.log(e)

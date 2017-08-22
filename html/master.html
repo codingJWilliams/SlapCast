@@ -172,12 +172,17 @@
         </div>
       </div>
       <div class="row" id="push" style="display: none">
-        <div class="col-sm-12">
+        <div class="col-sm-8">
           <div class="card text-white bg-dark">
-            <h4 class="card-title">
-              Push saved object?
-            </h4>
-            <button class="btn btn-outline-danger" onclick="pushSaved()"> Push </button>
+            <div class="card-body">
+              <h4 class="card-title">
+                Saved Object:
+              </h4>
+              <button class="btn btn-outline-danger" onclick="pushSaved()"> Push </button>
+            </div>
+            <table class="table table-borderless bg-dark" id="saved_obj">
+            </table>
+          </div>
         </div>
       </div>
       <br>
@@ -209,7 +214,13 @@
       params.background = $("#text_cue_background").val() == undefined ? "transparent" : $("#text_cue_background").val();
       $("#cue_text").fadeOut(function () {
         $("#push").fadeIn(function () {
-          savedObj = params
+          savedObj = params;
+          $("#saved_obj").html("")
+          for (key in savedObj) {
+            if (!savedObj.hasOwnProperty(key)) continue;
+            if (savedObj[key] == "") continue;
+            $("#saved_obj").append("<tr><td>" + key + "</td><td>" + savedObj[key] + "</td></tr>")
+          }
         })
       })
     }
