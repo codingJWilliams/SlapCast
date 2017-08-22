@@ -42,6 +42,12 @@
             </div>
             <ul class="list-group list-group-flush bg-dark">
               <li class="list-group-item bg-dark">
+                Clear Screen
+                <button class="btn btn-outline-primary float-right" onclick="cue('clear')">
+                  Use this type
+                </button>
+              </li>
+              <li class="list-group-item bg-dark">
                 Text
                 <button class="btn btn-outline-primary float-right" onclick="cue('text')">
                   Use this type
@@ -176,12 +182,23 @@
           <div class="card text-white bg-dark">
             <div class="card-body">
               <h4 class="card-title">
-                Saved Object:
+                Saved Object Properties:
               </h4>
-              <button class="btn btn-outline-danger" onclick="pushSaved()"> Push </button>
             </div>
             <table class="table table-borderless bg-dark" id="saved_obj">
             </table>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="card text-white bg-dark">
+            <div class="card-body">
+              <button class="btn btn-primary" onclick="pushSaved()">
+                Push
+              </button>
+              <button class="btn btn-dark" onclick="$('#push').fadeOut(function () { $('#main_screen').fadeIn(function () { savedObj = {} }) })">
+                Discard Changes
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -194,16 +211,39 @@
     <script src="https://cdn.rawgit.com/js-cookie/js-cookie/master/src/js.cookie.js"></script>
     <script>
     const socket = io();
+    var savedObj = {}
     socket.emit("connect-as-master", {key: "9073285"})
-    var key = "9073285"
+    var key = "9073285";
+    function pushSaved() {
+      socket.emit("cue", savedObj)
+      $("#push").fadeOut(function () {
+        $("#main_screen").fadeIn()
+        savedObj = {}
+      })
+    }
     function cue(type) {
       if (type === "text") {
         $("#main_screen").fadeOut(function () {
           $("#cue_text").fadeIn()
         })
+      } else if (type === "clear") {
+        var params = {};
+        params.cue = "clear";
+        params.key = key;
+        $("#main_screen").fadeOut(function () {
+          $("#saved_obj").html("")
+          for (key in params) {
+            if (!params.hasOwnProperty(key)) continue;
+            if (params[key] == "") continue;
+            $("#saved_obj").append("<tr><td>" + key + "</td><td>" + params[key] + "</td></tr>")
+          }
+          $("#push").fadeIn(function () {
+            savedObj = params;
+          })
+        })
       }
     }
-    var savedObj = {}
+
     function cueTextContinue() {
       var params = {};
       params.cue = "text"
@@ -213,20 +253,19 @@
       params.foreground = $("#text_cue_foreground").val() == undefined ? "#000000" : $("#text_cue_foreground").val();
       params.background = $("#text_cue_background").val() == undefined ? "transparent" : $("#text_cue_background").val();
       $("#cue_text").fadeOut(function () {
+        $("#saved_obj").html("")
+        for (key in params) {
+          if (!params.hasOwnProperty(key)) continue;
+          if (params[key] == "") continue;
+          $("#saved_obj").append("<tr><td>" + key + "</td><td>" + params[key] + "</td></tr>")
+        }
         $("#push").fadeIn(function () {
           savedObj = params;
-          $("#saved_obj").html("")
-          for (key in savedObj) {
-            if (!savedObj.hasOwnProperty(key)) continue;
-            if (savedObj[key] == "") continue;
-            $("#saved_obj").append("<tr><td>" + key + "</td><td>" + savedObj[key] + "</td></tr>")
-          }
+
         })
       })
     }
-    function pushSaved() {
-      socket.emit("cue", savedObj)
-    }
+
 
     </script>
   </body>

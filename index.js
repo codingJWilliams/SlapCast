@@ -64,8 +64,12 @@ io.on('connection', function(socket){
     } else {
       var pubkey = db.get("private_keys").find({priv: params.key}).value().pub;
       params.key = undefined;
-
-      io.to(pubkey).emit("display-text", params)
+      console.log(params.cue)
+      if (params.cue == "text"){
+        io.to(pubkey).emit("display-text", params)
+      } else if (params.cue == "clear") {
+        io.to(pubkey).emit("clear-screen", ":-)")
+      }
     }
   })
   //socket.on("debug-send", function (params) {
